@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Side</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Hello Admin!</h1>
+        <form action="/admin" method="post">
+            <div class="mb-3">
+                <label for="file_path" class="form-label">File Path:</label>
+                <input type="text" class="form-control" id="file_path" name="file_path" placeholder="Enter file path">
+            </div>
+            <div class="mb-3">
+                <label for="embedding_index" class="form-label">Embedding Index:</label>
+                <input type="text" class="form-control" id="embedding_index" name="embedding_index" placeholder="Enter embedding index">
+            </div>
+            <button type="submit" class="btn btn-primary">Generate Embeddings</button>
+        </form>
+    </div>
+</body>
+</html>
+
+
