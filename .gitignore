@@ -1,2 +1,4 @@
 mkr/
 ConversationCleaned.xlsx
+embeddings/
+__pycache__
