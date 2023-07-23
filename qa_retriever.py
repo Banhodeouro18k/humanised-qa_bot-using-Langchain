@@ -1,10 +1,10 @@
 from typing import List
 
-from langchain.chains import ConversationalRetrievalChain
+from langchain.chains import RetrievalQA
 from langchain.document_loaders.csv_loader import CSVLoader
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
-from langchain.memory import ConversationBufferMemory
+from langchain.prompts import PromptTemplate
 from langchain.schema.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
@@ -14,25 +14,33 @@ class QARetriver:
     def __init__(self):
         self.embeddings = OpenAIEmbeddings()
 
-        self.memory = ConversationBufferMemory(
-            memory_key="chat_history", return_messages=True
-        )
-
     def retrieve(self, query: str) -> str:
         try:
-            retriever = FAISS.load_local(
+            prompt_template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
+            {context}
+            Question: {question}
+            Answer in English:"""
+
+            prompt = PromptTemplate(
+                template=prompt_template, input_variables=["context", "question"]
+            )
+
+            vectorstore = FAISS.load_local(
                 folder_path="embeddings",
                 index_name="qa_index",
                 embeddings=self.embeddings,
             )
 
-            qa = ConversationalRetrievalChain.from_llm(
-                OpenAI(temperature=0.2), retriever.as_retriever(), memory=self.memory
+            qa = RetrievalQA.from_chain_type(
+                llm=OpenAI(temperature=0),
+                chain_type="stuff",
+                retriever=vectorstore.as_retriever(),
+                chain_type_kwargs={"prompt": prompt},
             )
 
-            result = qa({"question": query})
+            result = qa.run(query)
 
-            return result["answer"]
+            return result
 
         except Exception as e:
             raise e
