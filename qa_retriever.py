@@ -16,8 +16,11 @@ class QARetriver:
 
     def retrieve(self, query: str) -> str:
         try:
-            prompt_template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
+            prompt_template = """Use the following pieces of context to answer the question at the end. 
+            If you don't know the answer, just say that you don't know, don't try to make up an answer.
+            You need to just answer the question, do not give question and answer as output
             {context}
+            
             Question: {question}
             Answer in Telugu:"""
 
@@ -38,9 +41,9 @@ class QARetriver:
                 chain_type_kwargs={"prompt": prompt},
             )
 
-            result = qa.run(query)
+            response = qa({"query": query})
 
-            return result
+            return response["result"]
 
         except Exception as e:
             raise e
