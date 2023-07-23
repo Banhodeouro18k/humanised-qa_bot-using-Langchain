@@ -48,7 +48,7 @@ class QARetriver:
         except Exception as e:
             raise e
 
-    def generate_embeddings(self, src_file_path: str, embeddings_index: str):
+    def generate_embeddings(self, src_file_path: str, embeddings_index: str) -> None:
         try:
             loader = CSVLoader(file_path=src_file_path, encoding="utf-8")
 
