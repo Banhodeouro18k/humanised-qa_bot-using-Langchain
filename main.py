@@ -20,7 +20,7 @@ Answer:
 
 
 @cl.on_chat_start
-def main():
+async def main():
     prompt = PromptTemplate(template=template, input_variables=["context", "question"])
 
     vectorstore = FAISS.load_local(
@@ -37,6 +37,10 @@ def main():
         memory=memory,
         retriever=vectorstore.as_retriever(),
     )
+
+    await cl.AskUserMessage(
+        content="Hello, how are you?. Are you looking for any event ?",timeout=10
+    ).send()
 
     cl.user_session.set("llm_chain", qa_chain)
 
