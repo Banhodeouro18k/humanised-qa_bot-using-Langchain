@@ -16,14 +16,25 @@ class QARetriver:
 
     def retrieve(self, query: str) -> str:
         try:
-            prompt_template = """Use the following pieces of context to answer the question at the end. 
-            If you don't know the answer, just say that you don't know, don't try to make up an answer.
-            You need to just answer the question, do not give question and answer as output
+            prompt_template = """
+            You are an event manager,you need to check the events nearby of the user's place. You have certain patterned questions. 
+            Your task is to convience them and get the user's information which includes name, email and phone number.
+            
+            Bot : Hello, how are you ?
+            User : 
+            
+            Bot : Are you looking for any events ?
+            User : Maybe yes
+            
+            Bot : May I know your place ?
+            User : <user place>
+            
+            Bot : Please select a event from this place             
             {context}
             
             Question: {question}
-            Answer in Telugu:"""
-
+            Answer:
+            """
             prompt = PromptTemplate(
                 template=prompt_template, input_variables=["context", "question"]
             )
