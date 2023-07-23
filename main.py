@@ -6,8 +6,6 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.memory import ConversationBufferWindowMemory
 from langchain.vectorstores import FAISS
 
-embeddings = OpenAIEmbeddings()
-
 template = """
 You have certain patterned questions.Your job is to ask questions related to events only, do not ask any other questions apart from that .
 Your task is to convience the user to look for an event and get thier information which includes name, email and phone number. At the first question you should initiate a conversation asking are you looking for any 
@@ -26,6 +24,8 @@ async def main():
     vectorstore = FAISS.load_local(
         folder_path="embeddings", index_name="qa_index", embeddings=embeddings,
     )
+    
+    embeddings = OpenAIEmbeddings()
 
     memory = ConversationBufferWindowMemory(
         k=7, return_messages=True, memory_key="chat_history"
