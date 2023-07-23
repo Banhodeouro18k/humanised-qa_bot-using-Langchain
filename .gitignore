@@ -1,4 +1,5 @@
 mkr/
 ConversationCleaned.xlsx
 embeddings/
-__pycache__
+__pycache__/
+.chainlit

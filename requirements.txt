@@ -1,6 +1,5 @@
+chainlit==0.6.0
+cryptography==41.0.2
 faiss-cpu==1.7.4
-fastapi==0.100.0
-flask==2.3.2
 langchain==0.0.239
-openai==0.27.8
 tiktoken==0.4.0
