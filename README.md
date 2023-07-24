@@ -24,7 +24,7 @@ Follow these steps to set up and run the Humanized Chatbot on your local machine
 
 ### Prerequisites
 
-1. Make sure you have Python installed (version X.X or higher).
+1. Make sure you have Python installed (version 3.9 or higher).
 
 2. Install Flask and other required dependencies:
 ```bash
