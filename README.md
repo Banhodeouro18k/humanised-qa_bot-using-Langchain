@@ -28,7 +28,7 @@ Follow these steps to set up and run the Humanized Chatbot on your local machine
 
 2. Install Flask and other required dependencies:
 ```bash
-pip install flask
+pip install -r requirements.txt 
 # Add any other necessary packages here
 ```
 
