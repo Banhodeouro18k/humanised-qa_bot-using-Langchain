@@ -19,23 +19,21 @@ Question : {question}
 Answer:  
 """
 
+
 @cl.on_chat_start
 async def main():
     prompt = PromptTemplate(template=template, input_variables=["question", "context"])
-    
-    llm =  ChatOpenAI(temperature=0.2)
+
+    llm = ChatOpenAI(temperature=0.2)
 
     vectorstore = FAISS.load_local(
-        folder_path="embeddings", index_name="qa_index", embeddings=embeddings,
+        folder_path="embeddings", index_name="qa_index", embeddings=embeddings
     )
 
     memory = ConversationKGMemory(llm=llm)
 
     qa_chain = RetrievalQA.from_llm(
-        llm=llm,
-        prompt=prompt,
-        memory=memory,
-        retriever=vectorstore.as_retriever(),
+        llm=llm, prompt=prompt, memory=memory, retriever=vectorstore.as_retriever()
     )
 
     await cl.AskUserMessage(content="Hello, how are you?", timeout=10).send()
