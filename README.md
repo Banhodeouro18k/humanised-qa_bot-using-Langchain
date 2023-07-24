@@ -1,4 +1,4 @@
-# Project Name: Humanized Chatbot with Lang-Chain Framework and OpenAI
+#  Humanized Chatbot with Lang-Chain Framework and OpenAI
 
 Welcome to the Humanized Chatbot project! This chatbot is designed to replace a human presence on messaging platforms like Telegram and WhatsApp. It utilizes the Lang-Chain framework and OpenAI to create a human-like conversational experience for users. The chatbot learns from previous conversations and builds a knowledge graph memory to enhance its responses over time.
 
